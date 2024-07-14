@@ -9,7 +9,8 @@ import { UserSchema } from "@/schemas/User"
 import type { User } from "@/schemas/User"
 import { saveUser } from "@/app/actions/actions"
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useRouterRefresh } from "@/lib/useRouterRefresh"
 
 type Props = {
     user: User
@@ -25,6 +26,7 @@ export default function UserForm({ user }: Props) {
         resolver: zodResolver(UserSchema),
         defaultValues: { ...user },
     })
+    const refresh = useRouterRefresh()
 
     useEffect(() => {
         // boolean value to indicate form has not been saved
@@ -43,10 +45,29 @@ export default function UserForm({ user }: Props) {
             setErrors(result.errors)
             return
         } else {
-            setMessage(result.message)
-            router.refresh() // could grab a new timestamp from db
+            // setMessage(result.message)
+
+            // Call the router.refresh() function and wait for it to complete
+            // new Promise<void>((resolve) => {
+            //     router.refresh()
+            //     resolve()
+            // }).then(() => {
+            //     router.back();
+            // });
+
+            // router.refresh() // could grab a new timestamp from db
             // reset dirty fields
-            form.reset(form.getValues())
+            // form.reset(form.getValues())
+
+
+            // setTimeout(() => {
+            //     router.back();
+            // },200); // 
+
+            refresh()
+            .then(() => router.back())
+            
+
         }
     }
 
@@ -64,7 +85,7 @@ export default function UserForm({ user }: Props) {
                 </div>
             ) : null}
 
-            <Form {...form}>
+           <Form {...form}>
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     form.handleSubmit(onSubmit)();
