@@ -1,7 +1,11 @@
-# "Next.js Modal Form 
-## with react-hook-form, shadcn/ui Dialog, 
+# "Next.js Modal Form
+
+## with react-hook-form, shadcn/ui Dialog,
+
 ## Server Actions and Zod Validation"
+
 ---
+
 ### Author Links
 
 👋 Hello, I'm Dave Gray.
@@ -24,7 +28,7 @@
 
 ### Description
 
-📺 [YouTube Video](https://youtu.be/WyL_Jc6_-sY) for this repository.
+📺 [YouTube Video](https:/n/youtu.be/WyL_Jc6_-sY) for this repository.
 
 ---
 
@@ -32,6 +36,7 @@
 
 - npm install
 - npm run dev
+- npx json-server -w data/users.json -p 3500
 
 ---
 
